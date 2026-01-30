@@ -3,13 +3,17 @@ import java.util.ArrayList;
 
 public class Animal {
 
-  final long id;
-  final String species;
-  AnimalStatus status;// enum
-  final double base_conservation_value;
-  double health_rating;
-  ArrayList<Event> history = new ArrayList<>();
-  double currentConservationValue;
+  private final long id;
+  private final String species;
+  private AnimalStatus status;// enum
+  private final double base_conservation_value;
+  private double health_rating;
+  private ArrayList<Event> history = new ArrayList<>();
+  private double currentConservationValue;
+
+  public double getCurrentConservationValue() {
+    return currentConservationValue;
+  }
 
   public Animal(long id, String species, AnimalStatus status, double base_conservation_value, double health_rating) {
     this.id = id;
@@ -33,7 +37,7 @@ public class Animal {
 
     addEvent(
         new Event("health_update", adjustment,
-            LocalDate.now().toString(), "Health rating changed to " + newHealth));
+            LocalDate.now(), "Health rating changed to " + newHealth));
 
   }// adjusts health rating and recalculates base_conservation_value
 
@@ -65,11 +69,13 @@ public class Animal {
     this.currentConservationValue = calculateConservationValue();
 
     addEvent(
-        new Event("Finalized", 0.0, LocalDate.now().toString(), "Final value locked: " + currentConservationValue));
+        new Event("Finalized", 0.0, LocalDate.now(), "Final value locked: " + currentConservationValue));
 
   }// computes and locks final value for departed animals
 
-  // boolean isActive() {
-  // } // checks it still in sactuary
-  //
+  boolean isActive() {
+
+    return status.equals(AnimalStatus.ACTIVE);
+  } // checks it still in sactuary
+
 }
