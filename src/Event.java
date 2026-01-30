@@ -5,6 +5,15 @@ public class Event {
   final String date;
   final String details;
 
-  double getAdjustment() 
+  public Event(String type, double valueAdjustment, String date, String details) {
+    this.type = type;
+    this.valueAdjustment = valueAdjustment;
+    this.date = date;
+    this.details = details;
+  }
+
+  // double getAdjustment() {
+  //
+  // }
 
 }
