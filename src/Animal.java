@@ -64,6 +64,20 @@ public class Animal {
     return 0.5;
   }
 
+  public double getHistoricalValue(LocalDate fromDate) {
+    double value = base_conservation_value * getHealthMutiplier(health_rating);
+    // Add only events BEFORE fromDate
+    //
+    for (Event event : history) {
+      LocalDate eventDate = event.getDate();
+      if (eventDate.isBefore(fromDate)) {
+        value += event.getAdjustment();
+      }
+    }
+
+    return value;
+  }
+
   void finalizeConservationvalue() {
 
     this.currentConservationValue = calculateConservationValue();
@@ -77,5 +91,15 @@ public class Animal {
 
     return status.equals(AnimalStatus.ACTIVE);
   } // checks it still in sactuary
+
+  @Override
+  public String toString() {
+    return "Animal [id=" + id + ", species=" + species + ", status=" + status + ", health_rating=" + health_rating
+        + "]";
+  }
+
+  public void setCurrentConservationValue(double currentConservationValue) {
+    this.currentConservationValue = currentConservationValue;
+  }
 
 }

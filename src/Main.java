@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 
 public class Main {
   public static void main(String[] args) {
@@ -9,5 +10,9 @@ public class Main {
     animal.updateHealth(4);
     System.out.println(animal.calculateConservationValue());
 
+    SanctuaryManager sanctuaryManager = new SanctuaryManager();
+    sanctuaryManager.registerAnimal(animal);
+    System.out.println(sanctuaryManager.getTotalConservationValue());
+    System.out.println(sanctuaryManager.getHighestValueAnimal());
   }
 }
